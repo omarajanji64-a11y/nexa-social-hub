@@ -1,26 +1,190 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "NEXA Social — Automate Instagram for Your Clients" },
+      { name: "description", content: "Schedule posts, generate AI captions, and manage multiple Instagram accounts in one beautiful dashboard." },
+    ],
+  }),
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      {/* Nav */}
+      <header className="sticky top-0 z-40 border-b border-border/40 backdrop-blur-xl bg-background/60">
+        <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-lg bg-gradient-primary shadow-glow grid place-items-center">
+              <Sparkles className="h-4 w-4 text-primary-foreground" />
+            </div>
+            <span className="font-bold text-lg tracking-tight">NEXA<span className="text-gradient">Social</span></span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#features" className="hover:text-foreground transition">Features</a>
+            <a href="#pricing" className="hover:text-foreground transition">Pricing</a>
+            <Link to="/dashboard" className="hover:text-foreground transition">Dashboard</Link>
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+              <Link to="/dashboard">Sign in</Link>
+            </Button>
+            <Button asChild variant="hero" size="sm">
+              <Link to="/dashboard">Get Started</Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 pt-24 pb-32 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground mb-8">
+            <Zap className="h-3.5 w-3.5 text-accent" />
+            New — AI caption generator now live
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.05]">
+            Automate Instagram <br /> Content for{" "}
+            <span className="text-gradient">All Your Clients</span>
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Schedule posts, generate AI captions, and manage multiple accounts in one dashboard. Built for agencies and freelancers.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Button asChild variant="hero" size="xl">
+              <Link to="/dashboard">
+                Get Started <ArrowRight className="ml-1" />
+              </Link>
+            </Button>
+            <Button asChild variant="glass" size="xl">
+              <Link to="/dashboard">View Dashboard</Link>
+            </Button>
+          </div>
+
+          {/* Hero preview card */}
+          <div className="mt-20 mx-auto max-w-5xl glass rounded-2xl p-3 shadow-elegant">
+            <div className="rounded-xl bg-background/50 border border-border p-6 grid md:grid-cols-3 gap-4 text-left">
+              {[
+                { label: "Scheduled posts", val: "248", sub: "+12 this week", icon: Calendar },
+                { label: "Connected accounts", val: "16", sub: "5 clients", icon: Instagram },
+                { label: "AI captions", val: "1.2k", sub: "Generated", icon: Sparkles },
+              ].map((s) => (
+                <div key={s.label} className="rounded-lg bg-card/60 border border-border p-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">{s.label}</span>
+                    <s.icon className="h-4 w-4 text-accent" />
+                  </div>
+                  <div className="mt-3 text-3xl font-bold">{s.val}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{s.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="mx-auto max-w-7xl px-6 py-24">
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            Everything you need to <span className="text-gradient">scale content</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground">A complete toolkit for modern social media teams.</p>
+        </div>
+
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { icon: Sparkles, title: "AI Content Generation", desc: "Generate captions and hashtags tuned to your brand voice in seconds." },
+            { icon: Calendar, title: "Instagram Scheduling", desc: "Plan weeks of content with a beautiful calendar and queue." },
+            { icon: Users, title: "Multi-Account Management", desc: "Switch between clients without ever logging out." },
+            { icon: BarChart3, title: "Basic Analytics", desc: "Track posted, scheduled, and failed content at a glance." },
+          ].map((f) => (
+            <div key={f.title} className="glass rounded-2xl p-6 hover:shadow-glow transition-all hover:-translate-y-1">
+              <div className="h-11 w-11 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
+                <f.icon className="h-5 w-5 text-primary-foreground" />
+              </div>
+              <h3 className="mt-5 font-semibold text-lg">{f.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="mx-auto max-w-7xl px-6 py-24">
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Simple, transparent pricing</h2>
+          <p className="mt-4 text-muted-foreground">Start free. Upgrade when you grow.</p>
+        </div>
+
+        <div className="mt-16 grid md:grid-cols-3 gap-6">
+          {[
+            { name: "Free", price: "$0", desc: "For solo creators getting started.", features: ["1 Instagram account", "10 scheduled posts/mo", "Basic AI captions"], cta: "Start free", featured: false },
+            { name: "Pro", price: "$19", desc: "For freelancers managing a few clients.", features: ["5 Instagram accounts", "Unlimited scheduling", "Advanced AI captions", "Priority support"], cta: "Start Pro", featured: true },
+            { name: "Agency", price: "$79", desc: "For agencies running many brands.", features: ["Unlimited accounts", "Team collaboration", "Custom AI tones", "Dedicated manager"], cta: "Start Agency", featured: false },
+          ].map((p) => (
+            <div
+              key={p.name}
+              className={`relative rounded-2xl p-8 border ${
+                p.featured
+                  ? "bg-gradient-primary/10 border-primary/40 shadow-glow"
+                  : "glass"
+              }`}
+            >
+              {p.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-glow">
+                  Most popular
+                </div>
+              )}
+              <div className="text-sm text-muted-foreground">{p.name}</div>
+              <div className="mt-2 flex items-baseline gap-1">
+                <span className="text-5xl font-bold">{p.price}</span>
+                <span className="text-muted-foreground text-sm">/mo</span>
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
+              <ul className="mt-6 space-y-3 text-sm">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent" /> {f}
+                  </li>
+                ))}
+              </ul>
+              <Button asChild variant={p.featured ? "hero" : "glass"} size="lg" className="w-full mt-8">
+                <Link to="/dashboard">{p.cta}</Link>
+              </Button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-5xl px-6 pb-24">
+        <div className="glass rounded-3xl p-12 text-center shadow-elegant relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-hero opacity-60 pointer-events-none" />
+          <div className="relative">
+            <h3 className="text-3xl md:text-4xl font-bold">Ready to ship content faster?</h3>
+            <p className="mt-3 text-muted-foreground">Join agencies automating their Instagram workflow with NEXA.</p>
+            <Button asChild variant="hero" size="xl" className="mt-8">
+              <Link to="/dashboard">Open the Dashboard</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-border/40">
+        <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <div>© 2026 NEXA Social. All rights reserved.</div>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-foreground">Privacy</a>
+            <a href="#" className="hover:text-foreground">Terms</a>
+            <a href="#" className="hover:text-foreground">Contact</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
