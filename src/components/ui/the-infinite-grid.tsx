@@ -7,6 +7,7 @@ import {
   useMotionTemplate,
   useMotionValue,
 } from "framer-motion";
+import { BackgroundGlow } from "@/components/ui/background-components";
 
 type InfiniteGridBackgroundProps = {
   children?: React.ReactNode;
@@ -50,6 +51,7 @@ export const InfiniteGridBackground = ({
       onMouseMove={handleMouseMove}
       className={cn("relative min-h-screen overflow-hidden bg-background", className)}
     >
+      <BackgroundGlow className="fixed" />
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.05]">
         <GridPattern offsetX={gridOffsetX} offsetY={gridOffsetY} />
       </div>
