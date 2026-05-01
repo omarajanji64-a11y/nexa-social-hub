@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { AiInput } from "@/components/ui/ai-input";
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -58,6 +59,7 @@ function Landing() {
           <div className="mt-8">
             <AiInput />
           </div>
+          <NexaAgentScrollPreview />
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button asChild variant="hero" size="xl">
               <Link to="/dashboard">
@@ -190,5 +192,120 @@ function Landing() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function NexaAgentScrollPreview() {
+  const queue = [
+    {
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df0852?auto=format&fit=crop&w=600&q=80",
+      brand: "Northwind Cafe",
+      task: "Brunch reel caption",
+      status: "Ready",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+      brand: "Luma Studio",
+      task: "Launch carousel",
+      status: "Queued",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80",
+      brand: "Verde Fitness",
+      task: "Mobility post",
+      status: "Review",
+    },
+  ];
+
+  return (
+    <ContainerScroll
+      className="-mt-4"
+      titleComponent={
+        <div className="mx-auto max-w-3xl">
+          <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-medium text-accent">
+            <Sparkles className="h-3.5 w-3.5" />
+            NEXA Agent workspace
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
+            Watch NEXA Agent turn a prompt into a content plan.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground md:text-base">
+            The agent drafts captions, queues client posts, and keeps your Instagram calendar moving from one command.
+          </p>
+        </div>
+      }
+    >
+      <div className="flex h-full flex-col bg-background text-left">
+        <div className="flex h-14 items-center justify-between border-b border-border bg-card/60 px-4 md:px-6">
+          <div className="flex items-center gap-2">
+            <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary shadow-glow">
+              <Sparkles className="h-4 w-4 text-primary-foreground" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">NEXA Agent</div>
+              <div className="text-xs text-muted-foreground">Autopilot content desk</div>
+            </div>
+          </div>
+          <div className="hidden items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-xs font-medium text-success md:flex">
+            Live queue
+          </div>
+        </div>
+
+        <div className="grid min-h-0 flex-1 gap-4 p-4 md:grid-cols-[1.25fr_0.75fr] md:p-6">
+          <div className="min-h-0 rounded-xl border border-border bg-card/60 p-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Today</div>
+                <h3 className="mt-2 text-2xl font-bold">12 posts prepared</h3>
+              </div>
+              <div className="rounded-lg bg-accent/10 p-2 text-accent">
+                <Calendar className="h-5 w-5" />
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              {queue.map((item) => (
+                <div key={item.brand} className="overflow-hidden rounded-lg border border-border bg-background/60">
+                  <img src={item.image} alt={`${item.brand} content preview`} className="h-28 w-full object-cover" />
+                  <div className="p-3">
+                    <div className="text-xs text-muted-foreground">{item.brand}</div>
+                    <div className="mt-1 text-sm font-medium">{item.task}</div>
+                    <div className="mt-3 inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                      {item.status}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 rounded-lg border border-border bg-background/60 p-4">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Zap className="h-4 w-4 text-warning" />
+                Agent action
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                “Create next week’s posts for the agency accounts, reuse the winning tone from April, and leave anything risky for review.”
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {[
+              { label: "Connected accounts", value: "16", icon: Instagram },
+              { label: "Client approvals", value: "8", icon: Users },
+              { label: "Projected lift", value: "+24%", icon: BarChart3 },
+            ].map((metric) => (
+              <div key={metric.label} className="rounded-xl border border-border bg-card/60 p-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">{metric.label}</span>
+                  <metric.icon className="h-4 w-4 text-accent" />
+                </div>
+                <div className="mt-3 text-3xl font-bold">{metric.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </ContainerScroll>
   );
 }
