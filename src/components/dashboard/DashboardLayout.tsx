@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { to: "/dashboard/accounts", label: "Accounts", icon: Users },
-  { to: "/dashboard/scheduler", label: "Scheduler", icon: Calendar },
-  { to: "/dashboard/ai", label: "AI Generator", icon: Sparkles },
-  { to: "/dashboard/settings", label: "Settings", icon: Settings },
+  { to: "/dashboard/accounts", label: "Accounts", icon: Users, exact: false },
+  { to: "/dashboard/scheduler", label: "Scheduler", icon: Calendar, exact: false },
+  { to: "/dashboard/ai", label: "AI Generator", icon: Sparkles, exact: false },
+  { to: "/dashboard/settings", label: "Settings", icon: Settings, exact: false },
 ] as const;
 
 export function DashboardLayout() {
