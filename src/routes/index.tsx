@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { AiInput } from "@/components/ui/ai-input";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import { ClientOnly } from "@/components/ui/client-only";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -57,7 +58,9 @@ function Landing() {
             Schedule posts, generate AI captions, and manage multiple accounts in one dashboard. Built for agencies and freelancers.
           </p>
           <div className="mt-8">
-            <AiInput />
+            <ClientOnly>
+              <AiInput />
+            </ClientOnly>
           </div>
           <NexaAgentScrollPreview />
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -218,7 +221,8 @@ function NexaAgentScrollPreview() {
   ];
 
   return (
-    <ContainerScroll
+    <ClientOnly>
+      <ContainerScroll
       className="-mt-4"
       titleComponent={
         <div className="mx-auto max-w-3xl">
@@ -306,6 +310,7 @@ function NexaAgentScrollPreview() {
           </div>
         </div>
       </div>
-    </ContainerScroll>
+      </ContainerScroll>
+    </ClientOnly>
   );
 }
