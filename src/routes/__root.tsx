@@ -32,17 +32,27 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "NEXA Social — Automate Instagram for Your Clients" },
-      { name: "description", content: "Schedule posts, generate AI captions, and manage multiple Instagram accounts in one beautiful dashboard." },
+      {
+        name: "description",
+        content:
+          "Schedule posts, generate AI captions, and manage multiple Instagram accounts in one beautiful dashboard.",
+      },
       { name: "author", content: "NEXA Social" },
       { property: "og:title", content: "NEXA Social — Automate Instagram for Your Clients" },
-      { property: "og:description", content: "Schedule posts, generate AI captions, and manage multiple Instagram accounts." },
+      {
+        property: "og:description",
+        content: "Schedule posts, generate AI captions, and manage multiple Instagram accounts.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),
