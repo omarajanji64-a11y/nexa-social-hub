@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { AiInput } from "@/components/ui/ai-input";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -54,6 +55,9 @@ function Landing() {
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Schedule posts, generate AI captions, and manage multiple accounts in one dashboard. Built for agencies and freelancers.
           </p>
+          <div className="mt-8">
+            <AiInput />
+          </div>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button asChild variant="hero" size="xl">
               <Link to="/dashboard">
