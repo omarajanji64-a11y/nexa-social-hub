@@ -4,7 +4,7 @@ import { AiInput } from "@/components/ui/ai-input";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { ClientOnly } from "@/components/ui/client-only";
 import { CinematicHero } from "@/components/ui/cinematic-landing-hero";
-import MacOSDock from "@/components/ui/mac-os-dock";
+import { PlatformCanvas } from "@/components/ui/platform-canvas";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -19,43 +19,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
-  const navigate = useNavigate();
-
-  const dockApps = [
-    { 
-      id: 'instagram', 
-      name: 'Instagram', 
-      icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' 
-    },
-    { 
-      id: 'tiktok', 
-      name: 'TikTok', 
-      icon: 'https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg' 
-    },
-    { 
-      id: 'nexa-agent', 
-      name: 'Nexa Agent', 
-      icon: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png' 
-    },
-    { 
-      id: 'youtube', 
-      name: 'YouTube', 
-      icon: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg' 
-    },
-    { 
-      id: 'settings', 
-      name: 'Settings', 
-      icon: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Settings_icon.png' 
-    },
-  ];
-
-  const handleAppClick = (appId: string) => {
-    if (appId === 'instagram') navigate({ to: '/dashboard/instagram' });
-    else if (appId === 'tiktok') navigate({ to: '/dashboard/tiktok' });
-    else if (appId === 'youtube') navigate({ to: '/dashboard/youtube' });
-    else if (appId === 'settings') navigate({ to: '/dashboard/settings' });
-    else if (appId === 'nexa-agent') navigate({ to: '/dashboard/ai' });
-  };
 
   return (
     <div className="min-h-screen">
@@ -87,56 +50,11 @@ function Landing() {
       {/* Hero */}
       <CinematicHero />
 
-      {/* Canvas with Mac Dock */}
-      <section className="relative w-screen" style={{ backgroundColor: "#F5F5F7", height: "600px" }}>
-        <div className="absolute inset-0 flex items-end justify-center pb-8 px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 100 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 1, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative z-10"
-          >
-            <MacOSDock
-              apps={dockApps}
-              onAppClick={handleAppClick}
-              openApps={[]}
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="w-full" style={{ backgroundColor: "#FFFFFF", padding: "96px 24px" }}>
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#1D1D1F" }}>
-              Everything you need to <span style={{ color: "#0066CC" }}>scale content</span>
-            </h2>
-            <p className="mt-4" style={{ color: "#6E6E73" }}>A complete toolkit for modern social media teams.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Sparkles, title: "AI Content Generation", desc: "Generate captions and hashtags tuned to your brand voice in seconds." },
-              { icon: Calendar, title: "Instagram Scheduling", desc: "Plan weeks of content with a beautiful calendar and queue." },
-              { icon: Users, title: "Multi-Account Management", desc: "Switch between clients without ever logging out." },
-              { icon: BarChart3, title: "Basic Analytics", desc: "Track posted, scheduled, and failed content at a glance." },
-            ].map((f) => (
-              <div key={f.title} className="rounded-2xl p-6 transition-all" style={{ backgroundColor: "#F5F5F7", border: "1px solid #D2D2D7" }}>
-                <div className="h-11 w-11 rounded-xl grid place-items-center" style={{ backgroundColor: "#0066CC" }}>
-                  <f.icon className="h-5 w-5 text-white" />
-                </div>
-                <h3 className="mt-5 font-semibold text-lg" style={{ color: "#1D1D1F" }}>{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "#6E6E73" }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Platform Canvas with Dashboard Popup */}
+      <PlatformCanvas />
 
       {/* Pricing */}
-      <section id="pricing" className="w-full" style={{ backgroundColor: "#F5F5F7", padding: "96px 24px" }}>
+      <section id="pricing" className="w-full" style={{ backgroundColor: "#FFFFFF", paddingTop: "120px", paddingBottom: "96px", paddingLeft: "24px", paddingRight: "24px" }}>
         <div className="mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#1D1D1F" }}>Simple, transparent pricing</h2>
