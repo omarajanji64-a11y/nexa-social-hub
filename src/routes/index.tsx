@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { AiInput } from "@/components/ui/ai-input";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { ClientOnly } from "@/components/ui/client-only";
+import { CinematicHero } from "@/components/ui/cinematic-landing-hero";
+import MacOSDock from "@/components/ui/mac-os-dock";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -16,6 +18,32 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
+  const socialApps = [
+    { 
+      id: 'instagram', 
+      name: 'Instagram', 
+      icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' 
+    },
+    { 
+      id: 'youtube', 
+      name: 'YouTube', 
+      icon: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg' 
+    },
+    { 
+      id: 'tiktok', 
+      name: 'TikTok', 
+      icon: 'https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg' 
+    },
+  ];
+
+  const handleAppClick = (appId: string) => {
+    console.log('App clicked:', appId);
+    // For demo, perhaps open links or something
+    if (appId === 'instagram') window.open('https://instagram.com', '_blank');
+    if (appId === 'youtube') window.open('https://youtube.com', '_blank');
+    if (appId === 'tiktok') window.open('https://tiktok.com', '_blank');
+  };
+
   return (
     <div className="min-h-screen">
       {/* Nav */}
@@ -44,57 +72,16 @@ function Landing() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 pt-24 pb-32 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-muted-foreground mb-8">
-            <Zap className="h-3.5 w-3.5 text-accent" />
-            New — AI caption generator now live
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.05]">
-            Automate Instagram <br /> Content for{" "}
-            <span className="text-gradient">All Your Clients</span>
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Schedule posts, generate AI captions, and manage multiple accounts in one dashboard. Built for agencies and freelancers.
-          </p>
-          <div className="mt-8">
-            <ClientOnly>
-              <AiInput />
-            </ClientOnly>
-          </div>
-          <NexaAgentScrollPreview />
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button asChild variant="hero" size="xl">
-              <Link to="/dashboard">
-                Get Started <ArrowRight className="ml-1" />
-              </Link>
-            </Button>
-            <Button asChild variant="glass" size="xl">
-              <Link to="/dashboard">View Dashboard</Link>
-            </Button>
-          </div>
+      <CinematicHero />
 
-          {/* Hero preview card */}
-          <div className="mt-20 mx-auto max-w-5xl glass rounded-2xl p-3 shadow-elegant">
-            <div className="rounded-xl bg-background/50 border border-border p-6 grid md:grid-cols-3 gap-4 text-left">
-              {[
-                { label: "Scheduled posts", val: "248", sub: "+12 this week", icon: Calendar },
-                { label: "Connected accounts", val: "16", sub: "5 clients", icon: Instagram },
-                { label: "AI captions", val: "1.2k", sub: "Generated", icon: Sparkles },
-              ].map((s) => (
-                <div key={s.label} className="rounded-lg bg-card/60 border border-border p-5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{s.label}</span>
-                    <s.icon className="h-4 w-4 text-accent" />
-                  </div>
-                  <div className="mt-3 text-3xl font-bold">{s.val}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{s.sub}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Social Media Dock */}
+      <div className="flex justify-center py-16 bg-[#F8F8F8]">
+        <MacOSDock
+          apps={socialApps}
+          onAppClick={handleAppClick}
+          openApps={[]}
+        />
+      </div>
 
       {/* Features */}
       <section id="features" className="mx-auto max-w-7xl px-6 py-24">
