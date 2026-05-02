@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardYoutubeRouteImport } from './routes/dashboard.youtube'
+import { Route as DashboardTiktokRouteImport } from './routes/dashboard.tiktok'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardSchedulerRouteImport } from './routes/dashboard.scheduler'
+import { Route as DashboardInstagramRouteImport } from './routes/dashboard.instagram'
 import { Route as DashboardAiRouteImport } from './routes/dashboard.ai'
 import { Route as DashboardAccountsRouteImport } from './routes/dashboard.accounts'
 
@@ -32,6 +35,16 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardYoutubeRoute = DashboardYoutubeRouteImport.update({
+  id: '/youtube',
+  path: '/youtube',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTiktokRoute = DashboardTiktokRouteImport.update({
+  id: '/tiktok',
+  path: '/tiktok',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -40,6 +53,11 @@ const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
 const DashboardSchedulerRoute = DashboardSchedulerRouteImport.update({
   id: '/scheduler',
   path: '/scheduler',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInstagramRoute = DashboardInstagramRouteImport.update({
+  id: '/instagram',
+  path: '/instagram',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardAiRoute = DashboardAiRouteImport.update({
@@ -58,16 +76,22 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard/accounts': typeof DashboardAccountsRoute
   '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/instagram': typeof DashboardInstagramRoute
   '/dashboard/scheduler': typeof DashboardSchedulerRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tiktok': typeof DashboardTiktokRoute
+  '/dashboard/youtube': typeof DashboardYoutubeRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard/accounts': typeof DashboardAccountsRoute
   '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/instagram': typeof DashboardInstagramRoute
   '/dashboard/scheduler': typeof DashboardSchedulerRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tiktok': typeof DashboardTiktokRoute
+  '/dashboard/youtube': typeof DashboardYoutubeRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -76,8 +100,11 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard/accounts': typeof DashboardAccountsRoute
   '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/instagram': typeof DashboardInstagramRoute
   '/dashboard/scheduler': typeof DashboardSchedulerRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tiktok': typeof DashboardTiktokRoute
+  '/dashboard/youtube': typeof DashboardYoutubeRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -87,16 +114,22 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/dashboard/accounts'
     | '/dashboard/ai'
+    | '/dashboard/instagram'
     | '/dashboard/scheduler'
     | '/dashboard/settings'
+    | '/dashboard/tiktok'
+    | '/dashboard/youtube'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard/accounts'
     | '/dashboard/ai'
+    | '/dashboard/instagram'
     | '/dashboard/scheduler'
     | '/dashboard/settings'
+    | '/dashboard/tiktok'
+    | '/dashboard/youtube'
     | '/dashboard'
   id:
     | '__root__'
@@ -104,8 +137,11 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/dashboard/accounts'
     | '/dashboard/ai'
+    | '/dashboard/instagram'
     | '/dashboard/scheduler'
     | '/dashboard/settings'
+    | '/dashboard/tiktok'
+    | '/dashboard/youtube'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -137,6 +173,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/youtube': {
+      id: '/dashboard/youtube'
+      path: '/youtube'
+      fullPath: '/dashboard/youtube'
+      preLoaderRoute: typeof DashboardYoutubeRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/tiktok': {
+      id: '/dashboard/tiktok'
+      path: '/tiktok'
+      fullPath: '/dashboard/tiktok'
+      preLoaderRoute: typeof DashboardTiktokRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
@@ -149,6 +199,13 @@ declare module '@tanstack/react-router' {
       path: '/scheduler'
       fullPath: '/dashboard/scheduler'
       preLoaderRoute: typeof DashboardSchedulerRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/instagram': {
+      id: '/dashboard/instagram'
+      path: '/instagram'
+      fullPath: '/dashboard/instagram'
+      preLoaderRoute: typeof DashboardInstagramRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/ai': {
@@ -171,16 +228,22 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteChildren {
   DashboardAccountsRoute: typeof DashboardAccountsRoute
   DashboardAiRoute: typeof DashboardAiRoute
+  DashboardInstagramRoute: typeof DashboardInstagramRoute
   DashboardSchedulerRoute: typeof DashboardSchedulerRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardTiktokRoute: typeof DashboardTiktokRoute
+  DashboardYoutubeRoute: typeof DashboardYoutubeRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAccountsRoute: DashboardAccountsRoute,
   DashboardAiRoute: DashboardAiRoute,
+  DashboardInstagramRoute: DashboardInstagramRoute,
   DashboardSchedulerRoute: DashboardSchedulerRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardTiktokRoute: DashboardTiktokRoute,
+  DashboardYoutubeRoute: DashboardYoutubeRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 

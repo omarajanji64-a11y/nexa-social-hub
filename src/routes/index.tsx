@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { AiInput } from "@/components/ui/ai-input";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
@@ -6,6 +6,7 @@ import { ClientOnly } from "@/components/ui/client-only";
 import { CinematicHero } from "@/components/ui/cinematic-landing-hero";
 import MacOSDock from "@/components/ui/mac-os-dock";
 import { Sparkles, Calendar, Users, BarChart3, Check, Instagram, Zap, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,11 +19,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
-  const socialApps = [
+  const navigate = useNavigate();
+
+  const dockApps = [
     { 
       id: 'instagram', 
       name: 'Instagram', 
       icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' 
+    },
+    { 
+      id: 'tiktok', 
+      name: 'TikTok', 
+      icon: 'https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg' 
     },
     { 
       id: 'youtube', 
@@ -30,18 +38,23 @@ function Landing() {
       icon: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg' 
     },
     { 
-      id: 'tiktok', 
-      name: 'TikTok', 
-      icon: 'https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg' 
+      id: 'settings', 
+      name: 'Settings', 
+      icon: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Settings_icon.png' 
+    },
+    { 
+      id: 'nexa-agent', 
+      name: 'Nexa Agent', 
+      icon: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png' 
     },
   ];
 
   const handleAppClick = (appId: string) => {
-    console.log('App clicked:', appId);
-    // For demo, perhaps open links or something
-    if (appId === 'instagram') window.open('https://instagram.com', '_blank');
-    if (appId === 'youtube') window.open('https://youtube.com', '_blank');
-    if (appId === 'tiktok') window.open('https://tiktok.com', '_blank');
+    if (appId === 'instagram') navigate({ to: '/dashboard/instagram' });
+    else if (appId === 'tiktok') navigate({ to: '/dashboard/tiktok' });
+    else if (appId === 'youtube') navigate({ to: '/dashboard/youtube' });
+    else if (appId === 'settings') navigate({ to: '/dashboard/settings' });
+    else if (appId === 'nexa-agent') navigate({ to: '/dashboard/ai' });
   };
 
   return (
@@ -74,14 +87,27 @@ function Landing() {
       {/* Hero */}
       <CinematicHero />
 
-      {/* Social Media Dock */}
-      <div className="flex justify-center py-16 bg-[#F8F8F8]">
-        <MacOSDock
-          apps={socialApps}
-          onAppClick={handleAppClick}
-          openApps={[]}
-        />
-      </div>
+      {/* Canvas with Mac Dock */}
+      <section className="relative min-h-screen flex items-center justify-center bg-[#F8F8F8] overflow-hidden">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }} />
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 50, scale: 0.9 }} 
+          animate={{ opacity: 1, y: 0, scale: 1 }} 
+          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+          className="relative z-10"
+        >
+          <MacOSDock
+            apps={dockApps}
+            onAppClick={handleAppClick}
+            openApps={[]}
+          />
+        </motion.div>
+      </section>
 
       {/* Features */}
       <section id="features" className="mx-auto max-w-7xl px-6 py-24">
