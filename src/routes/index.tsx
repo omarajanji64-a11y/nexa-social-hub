@@ -33,6 +33,11 @@ function Landing() {
       icon: 'https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg' 
     },
     { 
+      id: 'nexa-agent', 
+      name: 'Nexa Agent', 
+      icon: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png' 
+    },
+    { 
       id: 'youtube', 
       name: 'YouTube', 
       icon: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg' 
@@ -41,11 +46,6 @@ function Landing() {
       id: 'settings', 
       name: 'Settings', 
       icon: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Settings_icon.png' 
-    },
-    { 
-      id: 'nexa-agent', 
-      name: 'Nexa Agent', 
-      icon: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png' 
     },
   ];
 
@@ -88,7 +88,7 @@ function Landing() {
       <CinematicHero />
 
       {/* Canvas with Mac Dock */}
-      <section className="relative min-h-screen flex items-center justify-center bg-[#F8F8F8] overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#F8F8F8] overflow-hidden py-24">
         {/* Subtle grid background */}
         <div className="absolute inset-0 opacity-30" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
@@ -99,7 +99,7 @@ function Landing() {
           initial={{ opacity: 0, y: 50, scale: 0.9 }} 
           animate={{ opacity: 1, y: 0, scale: 1 }} 
           transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-          className="relative z-10"
+          className="relative z-10 mb-16"
         >
           <MacOSDock
             apps={dockApps}
@@ -107,33 +107,38 @@ function Landing() {
             openApps={[]}
           />
         </motion.div>
-      </section>
 
-      {/* Features */}
-      <section id="features" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Everything you need to <span className="text-gradient">scale content</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground">A complete toolkit for modern social media teams.</p>
-        </div>
+        {/* Features */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+          className="relative z-10 w-full max-w-7xl px-6"
+        >
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Everything you need to <span className="text-gradient">scale content</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">A complete toolkit for modern social media teams.</p>
+          </div>
 
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { icon: Sparkles, title: "AI Content Generation", desc: "Generate captions and hashtags tuned to your brand voice in seconds." },
-            { icon: Calendar, title: "Instagram Scheduling", desc: "Plan weeks of content with a beautiful calendar and queue." },
-            { icon: Users, title: "Multi-Account Management", desc: "Switch between clients without ever logging out." },
-            { icon: BarChart3, title: "Basic Analytics", desc: "Track posted, scheduled, and failed content at a glance." },
-          ].map((f) => (
-            <div key={f.title} className="glass rounded-2xl p-6 hover:shadow-glow transition-all hover:-translate-y-1">
-              <div className="h-11 w-11 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
-                <f.icon className="h-5 w-5 text-primary-foreground" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Sparkles, title: "AI Content Generation", desc: "Generate captions and hashtags tuned to your brand voice in seconds." },
+              { icon: Calendar, title: "Instagram Scheduling", desc: "Plan weeks of content with a beautiful calendar and queue." },
+              { icon: Users, title: "Multi-Account Management", desc: "Switch between clients without ever logging out." },
+              { icon: BarChart3, title: "Basic Analytics", desc: "Track posted, scheduled, and failed content at a glance." },
+            ].map((f) => (
+              <div key={f.title} className="glass rounded-2xl p-6 hover:shadow-glow transition-all hover:-translate-y-1">
+                <div className="h-11 w-11 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
+                  <f.icon className="h-5 w-5 text-primary-foreground" />
+                </div>
+                <h3 className="mt-5 font-semibold text-lg">{f.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
-              <h3 className="mt-5 font-semibold text-lg">{f.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* Pricing */}
