@@ -240,16 +240,17 @@ const MacOSDock: React.FC<MacOSDockProps> = ({
     return (
     <div 
       ref={dockRef}
-      className={`backdrop-blur-md ${className}`}
+      className={`${className}`}
       style={{
         width: `${contentWidth + padding * 2}px`,
-        background: 'rgba(245, 245, 245, 0.75)',
-        borderRadius: `${Math.max(12, baseIconSize * 0.4)}px`,
-        border: '1px solid rgba(0, 0, 0, 0.15)',
+        background: 'rgba(255,255,255,0.7)',
+        backdropFilter: 'blur(20px)',
+        borderRadius: '20px',
+        border: '1px solid rgba(0, 0, 0, 0.1)',
         boxShadow: `
-          0 ${Math.max(4, baseIconSize * 0.1)}px ${Math.max(16, baseIconSize * 0.4)}px rgba(0, 0, 0, 0.1),
-          0 ${Math.max(2, baseIconSize * 0.05)}px ${Math.max(8, baseIconSize * 0.2)}px rgba(0, 0, 0, 0.05),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8),
+          0 ${Math.max(4, baseIconSize * 0.1)}px ${Math.max(16, baseIconSize * 0.4)}px rgba(0, 0, 0, 0.08),
+          0 ${Math.max(2, baseIconSize * 0.05)}px ${Math.max(8, baseIconSize * 0.2)}px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9),
           inset 0 -1px 0 rgba(0, 0, 0, 0.05)
         `,
         padding: `${padding}px`

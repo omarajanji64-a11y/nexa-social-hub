@@ -60,24 +60,24 @@ function Landing() {
   return (
     <div className="min-h-screen">
       {/* Nav */}
-      <header className="sticky top-0 z-40 border-b border-border/40 backdrop-blur-xl bg-background/60">
+      <header className="sticky top-0 z-40 border-b border-[#D2D2D7] backdrop-blur-xl bg-white">
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-primary shadow-glow grid place-items-center">
-              <Sparkles className="h-4 w-4 text-primary-foreground" />
+            <div className="h-8 w-8 rounded-lg bg-[#0066CC] grid place-items-center">
+              <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-lg tracking-tight">NEXA<span className="text-gradient">Social</span></span>
+            <span className="font-bold text-lg tracking-tight" style={{ color: "#1D1D1F" }}>NEXA<span style={{ color: "#0066CC" }}>Social</span></span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition">Features</a>
-            <a href="#pricing" className="hover:text-foreground transition">Pricing</a>
-            <Link to="/dashboard" className="hover:text-foreground transition">Dashboard</Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: "#6E6E73" }}>
+            <a href="#features" className="hover:" style={{ color: "#1D1D1F" }}>Features</a>
+            <a href="#pricing" className="hover:" style={{ color: "#1D1D1F" }}>Pricing</a>
+            <Link to="/dashboard" style={{ color: "#1D1D1F" }}>Dashboard</Link>
           </nav>
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex" style={{ color: "#1D1D1F" }}>
               <Link to="/dashboard">Sign in</Link>
             </Button>
-            <Button asChild variant="hero" size="sm">
+            <Button asChild size="sm" style={{ backgroundColor: "#0066CC", color: "white" }}>
               <Link to="/dashboard">Get Started</Link>
             </Button>
           </div>
@@ -88,38 +88,32 @@ function Landing() {
       <CinematicHero />
 
       {/* Canvas with Mac Dock */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#F8F8F8] overflow-hidden py-24">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 opacity-30" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 50, scale: 0.9 }} 
-          animate={{ opacity: 1, y: 0, scale: 1 }} 
-          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-          className="relative z-10 mb-16"
-        >
-          <MacOSDock
-            apps={dockApps}
-            onAppClick={handleAppClick}
-            openApps={[]}
-          />
-        </motion.div>
+      <section className="relative w-screen" style={{ backgroundColor: "#F5F5F7", height: "600px" }}>
+        <div className="absolute inset-0 flex items-end justify-center pb-8 px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="relative z-10"
+          >
+            <MacOSDock
+              apps={dockApps}
+              onAppClick={handleAppClick}
+              openApps={[]}
+            />
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Features */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-7xl px-6"
-        >
+      {/* Features */}
+      <section className="w-full" style={{ backgroundColor: "#FFFFFF", padding: "96px 24px" }}>
+        <div className="mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              Everything you need to <span className="text-gradient">scale content</span>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#1D1D1F" }}>
+              Everything you need to <span style={{ color: "#0066CC" }}>scale content</span>
             </h2>
-            <p className="mt-4 text-muted-foreground">A complete toolkit for modern social media teams.</p>
+            <p className="mt-4" style={{ color: "#6E6E73" }}>A complete toolkit for modern social media teams.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -129,86 +123,89 @@ function Landing() {
               { icon: Users, title: "Multi-Account Management", desc: "Switch between clients without ever logging out." },
               { icon: BarChart3, title: "Basic Analytics", desc: "Track posted, scheduled, and failed content at a glance." },
             ].map((f) => (
-              <div key={f.title} className="glass rounded-2xl p-6 hover:shadow-glow transition-all hover:-translate-y-1">
-                <div className="h-11 w-11 rounded-xl bg-gradient-primary grid place-items-center shadow-glow">
-                  <f.icon className="h-5 w-5 text-primary-foreground" />
+              <div key={f.title} className="rounded-2xl p-6 transition-all" style={{ backgroundColor: "#F5F5F7", border: "1px solid #D2D2D7" }}>
+                <div className="h-11 w-11 rounded-xl grid place-items-center" style={{ backgroundColor: "#0066CC" }}>
+                  <f.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="mt-5 font-semibold text-lg">{f.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                <h3 className="mt-5 font-semibold text-lg" style={{ color: "#1D1D1F" }}>{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "#6E6E73" }}>{f.desc}</p>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Simple, transparent pricing</h2>
-          <p className="mt-4 text-muted-foreground">Start free. Upgrade when you grow.</p>
-        </div>
+      <section id="pricing" className="w-full" style={{ backgroundColor: "#F5F5F7", padding: "96px 24px" }}>
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight" style={{ color: "#1D1D1F" }}>Simple, transparent pricing</h2>
+            <p className="mt-4" style={{ color: "#6E6E73" }}>Start free. Upgrade when you grow.</p>
+          </div>
 
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          {[
-            { name: "Free", price: "$0", desc: "For solo creators getting started.", features: ["1 Instagram account", "10 scheduled posts/mo", "Basic AI captions"], cta: "Start free", featured: false },
-            { name: "Pro", price: "$19", desc: "For freelancers managing a few clients.", features: ["5 Instagram accounts", "Unlimited scheduling", "Advanced AI captions", "Priority support"], cta: "Start Pro", featured: true },
-            { name: "Agency", price: "$79", desc: "For agencies running many brands.", features: ["Unlimited accounts", "Team collaboration", "Custom AI tones", "Dedicated manager"], cta: "Start Agency", featured: false },
-          ].map((p) => (
-            <div
-              key={p.name}
-              className={`relative rounded-2xl p-8 border ${
-                p.featured
-                  ? "bg-gradient-primary/10 border-primary/40 shadow-glow"
-                  : "glass"
-              }`}
-            >
-              {p.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-glow">
-                  Most popular
+          <div className="mt-16 grid md:grid-cols-3 gap-6">
+            {[
+              { name: "Free", price: "$0", desc: "For solo creators getting started.", features: ["1 Instagram account", "10 scheduled posts/mo", "Basic AI captions"], cta: "Start free", featured: false },
+              { name: "Pro", price: "$19", desc: "For freelancers managing a few clients.", features: ["5 Instagram accounts", "Unlimited scheduling", "Advanced AI captions", "Priority support"], cta: "Start Pro", featured: true },
+              { name: "Agency", price: "$79", desc: "For agencies running many brands.", features: ["Unlimited accounts", "Team collaboration", "Custom AI tones", "Dedicated manager"], cta: "Start Agency", featured: false },
+            ].map((p) => (
+              <div
+                key={p.name}
+                className={`relative rounded-2xl p-8 border`}
+                style={{
+                  backgroundColor: p.featured ? "#FFFFFF" : "#FFFFFF",
+                  borderColor: p.featured ? "#0066CC" : "#D2D2D7"
+                }}
+              >
+                {p.featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-xs font-semibold" style={{ backgroundColor: "#0066CC", color: "white" }}>
+                    Most popular
+                  </div>
+                )}
+                <div className="text-sm" style={{ color: "#6E6E73" }}>{p.name}</div>
+                <div className="mt-2 flex items-baseline gap-1">
+                  <span className="text-5xl font-bold" style={{ color: "#1D1D1F" }}>{p.price}</span>
+                  <span style={{ color: "#6E6E73" }} className="text-sm">/mo</span>
                 </div>
-              )}
-              <div className="text-sm text-muted-foreground">{p.name}</div>
-              <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-5xl font-bold">{p.price}</span>
-                <span className="text-muted-foreground text-sm">/mo</span>
+                <p className="mt-3 text-sm" style={{ color: "#6E6E73" }}>{p.desc}</p>
+                <ul className="mt-6 space-y-3 text-sm">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2" style={{ color: "#1D1D1F" }}>
+                      <Check className="h-4 w-4" style={{ color: "#0066CC" }} /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button asChild size="lg" className="w-full mt-8" style={{ backgroundColor: "#0066CC", color: "white" }}>
+                  <Link to="/dashboard">{p.cta}</Link>
+                </Button>
               </div>
-              <p className="mt-3 text-sm text-muted-foreground">{p.desc}</p>
-              <ul className="mt-6 space-y-3 text-sm">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-accent" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Button asChild variant={p.featured ? "hero" : "glass"} size="lg" className="w-full mt-8">
-                <Link to="/dashboard">{p.cta}</Link>
-              </Button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-5xl px-6 pb-24">
-        <div className="glass rounded-3xl p-12 text-center shadow-elegant relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-hero opacity-60 pointer-events-none" />
-          <div className="relative">
-            <h3 className="text-3xl md:text-4xl font-bold">Ready to ship content faster?</h3>
-            <p className="mt-3 text-muted-foreground">Join agencies automating their Instagram workflow with NEXA.</p>
-            <Button asChild variant="hero" size="xl" className="mt-8">
-              <Link to="/dashboard">Open the Dashboard</Link>
-            </Button>
+      <section className="w-full" style={{ backgroundColor: "#FFFFFF", padding: "96px 24px" }}>
+        <div className="mx-auto max-w-5xl">
+          <div className="rounded-3xl p-12 text-center relative overflow-hidden" style={{ backgroundColor: "#F5F5F7", border: "1px solid #D2D2D7" }}>
+            <div className="relative">
+              <h3 className="text-3xl md:text-4xl font-bold" style={{ color: "#1D1D1F" }}>Ready to ship content faster?</h3>
+              <p className="mt-3" style={{ color: "#6E6E73" }}>Join agencies automating their Instagram workflow with NEXA.</p>
+              <Button asChild size="xl" className="mt-8" style={{ backgroundColor: "#0066CC", color: "white" }}>
+                <Link to="/dashboard">Open the Dashboard</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-border/40">
-        <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+      <footer style={{ borderTop: "1px solid #D2D2D7", backgroundColor: "#FFFFFF" }}>
+        <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm" style={{ color: "#6E6E73" }}>
           <div>© 2026 NEXA Social. All rights reserved.</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground">Privacy</a>
-            <a href="#" className="hover:text-foreground">Terms</a>
-            <a href="#" className="hover:text-foreground">Contact</a>
+            <a href="#" style={{ color: "#6E6E73" }}>Privacy</a>
+            <a href="#" style={{ color: "#6E6E73" }}>Terms</a>
+            <a href="#" style={{ color: "#6E6E73" }}>Contact</a>
           </div>
         </div>
       </footer>
